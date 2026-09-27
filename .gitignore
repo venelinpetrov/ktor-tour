@@ -9,4 +9,9 @@
 /dataSources/
 /dataSources.local.xml
 
-build
+
+build/
+.gradle/
+.idea/
+*.iml
+.kotlin
