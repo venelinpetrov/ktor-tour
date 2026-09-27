@@ -1,0 +1,6 @@
+ktor:
+  deployment:
+    port: 9494
+  application:
+    modules:
+      - com.vpe.RoutingKt.configureRouting
