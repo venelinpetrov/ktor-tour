@@ -1,13 +1,33 @@
 package com.vpe
 
 import io.ktor.server.application.*
+import io.ktor.http.ContentType
+import io.ktor.server.http.content.staticResources
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.plugins.statuspages.StatusPages
 
 fun Application.configureRouting() {
+    install(StatusPages) {
+        exception<IllegalStateException> { call, cause ->
+            call.respondText("App in illegal state as ${cause.message}")
+        }
+    }
     routing {
         get("/") {
             call.respondText("Hello, World!")
         }
+
+        get("/test1") {
+            val text = "<h1>Hello from Ktor</h1>"
+            val type = ContentType.parse("text/html")
+            call.respondText(text, type)
+        }
+
+        get("/error-test") {
+            throw IllegalStateException("Too busy")
+        }
+
+        staticResources("/content", "mycontent")
     }
 }
