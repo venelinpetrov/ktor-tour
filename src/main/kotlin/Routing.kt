@@ -1,11 +1,11 @@
 package com.vpe
 
+import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.http.ContentType
-import io.ktor.server.http.content.staticResources
+import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.ktor.server.plugins.statuspages.StatusPages
+import com.vpe.model.*
 
 fun Application.configureRouting() {
     install(StatusPages) {
@@ -14,20 +14,11 @@ fun Application.configureRouting() {
         }
     }
     routing {
-        get("/") {
-            call.respondText("Hello, World!")
+        get("/tasks") {
+            val tasks = TaskRepository.allTasks()
+            call.respondText(
+                contentType = ContentType.parse("text/html"), text = tasks.tasksAsTable()
+            )
         }
-
-        get("/test1") {
-            val text = "<h1>Hello from Ktor</h1>"
-            val type = ContentType.parse("text/html")
-            call.respondText(text, type)
-        }
-
-        get("/error-test") {
-            throw IllegalStateException("Too busy")
-        }
-
-        staticResources("/content", "mycontent")
     }
 }
