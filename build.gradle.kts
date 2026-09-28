@@ -24,3 +24,9 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)
 }
+
+tasks.test {
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}

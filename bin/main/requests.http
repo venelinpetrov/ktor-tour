@@ -1,9 +1,0 @@
-GET http://0.0.0.0:9494
-
-###
-
-GET http://0.0.0.0:9494/test1
-
-###
-
-GET http://0.0.0.0:9494/content/sample.html

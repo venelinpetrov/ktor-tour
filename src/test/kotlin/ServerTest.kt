@@ -8,24 +8,33 @@ import io.ktor.server.testing.testApplication
 import kotlin.test.*
 
 class ServerTest {
-
     @Test
-    fun `test root endpoint`() = testApplication {
-        // loads default configuration
-        configure()
-        // verify server root returns 200
-        assertEquals(HttpStatusCode.OK, client.get("/").status)
-    }
-
-    @Test
-    fun `test new endpoint`() = testApplication {
+    fun tasksCanBeFoundByPriority() = testApplication {
         configure()
 
-         val response = client.get("/test1")
+        val response = client.get("/tasks/byPriority/Medium")
+        val body = response.bodyAsText()
 
         assertEquals(HttpStatusCode.OK, response.status)
-        assertEquals("html", response.contentType()?.contentSubtype)
-        assertContains(response.bodyAsText(), "Hello from Ktor")
+        assertContains(body, "Mow the lawn")
+        assertContains(body, "Paint the fence")
     }
 
+    @Test
+    fun invalidPropertyProduces400() = testApplication {
+        configure()
+
+        val response = client.get("/tasks/byPriority/None")
+
+        assertEquals(HttpStatusCode.BadRequest, response.status)
+    }
+
+    @Test
+    fun unusedPropertyPropertyProduces404() = testApplication {
+        configure()
+
+        val response = client.get("/tasks/byPriority/Vital")
+
+        assertEquals(HttpStatusCode.NotFound, response.status)
+    }
 }
