@@ -4,3 +4,4 @@ ktor:
   application:
     modules:
       - com.vpe.RoutingKt.configureRouting
+      - com.vpe.SerializationKt.configureSerialization
