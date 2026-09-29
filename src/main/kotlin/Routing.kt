@@ -6,6 +6,8 @@ import io.ktor.server.routing.*
 import com.vpe.model.*
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.http.content.staticResources
+import io.ktor.server.request.receive
+import kotlinx.serialization.SerializationException
 
 fun Application.configureRouting() {
     routing {
@@ -48,6 +50,33 @@ fun Application.configureRouting() {
                     call.respond(tasks)
                 } catch (_: IllegalArgumentException) {
                     call.respond(HttpStatusCode.BadRequest)
+                }
+            }
+            post {
+                try {
+                    val task = call.receive<Task>()
+                    TaskRepository.addTask(task)
+                    call.respond(HttpStatusCode.Created)
+
+                } catch (_: IllegalStateException) {
+                    call.respond(HttpStatusCode.BadRequest)
+                } catch (_: SerializationException) {
+                    call.respond(HttpStatusCode.BadRequest)
+                }
+            }
+
+            delete("/{taskName?}") {
+                val name = call.parameters["taskName"]
+                
+                if (name == null) {
+                    call.respond(HttpStatusCode.BadRequest)
+                    return@delete
+                }
+
+                if (TaskRepository.removeTask(name)) {
+                    call.respond(HttpStatusCode.NoContent)
+                } else {
+                    call.respond(HttpStatusCode.NotFound)
                 }
             }
         }

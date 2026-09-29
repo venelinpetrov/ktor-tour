@@ -27,4 +27,7 @@ object TaskRepository {
         }
         tasks.add(task)
     }
+
+    fun removeTask(taskName: String) = tasks.removeIf { it.name == taskName }
+
 }

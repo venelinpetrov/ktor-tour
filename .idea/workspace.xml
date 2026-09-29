@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bada0f40-6161-4de4-b6a8-8a1e2d0287e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Routing.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Routing.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/model/TaskRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/model/TaskRepository.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +70,7 @@
   "keyToString": {
     "CidrDebugProfileConversion": "true",
     "DefaultHtmlFileTemplate": "HTML File",
-    "Gradle./home/vpe/Projects/ktor-tour [run].executor": "Run",
+    "Gradle./home/vpe/Projects/ktor-tour [run].executor": "Debug",
     "Gradle./home/vpe/Projects/ktor-tour [test].executor": "Run",
     "Gradle.Build ktor-tour.executor": "Run",
     "Gradle.ServerTest.executor": "Run",
